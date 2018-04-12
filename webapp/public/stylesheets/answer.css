@@ -1,0 +1,54 @@
+
+html, body{
+    height: 100%;
+    width:100%;
+    font-size: 20px;
+
+}
+.hero_title{
+    margin-top: 0.2rem;
+    color: #fdcce6;
+    text-align: center;
+    display: block;
+    padding: 0.5rem;
+    font-size: 1.3rem;
+}
+.question {
+    width:100%;
+    height:100%;
+    background-image: url("../images/bg_new.jpg");
+    background-size: contain;
+}
+
+.question-title{
+    color: #fff;
+    display: none;
+    font-family: PingFangSC-Semibold,Roboto-bold;
+    font-weight: 700;
+    font-size: 1.0rem;
+    padding: 1rem;
+}
+
+
+.answer{
+    color: #fff;
+    display: none;
+    font-family: PingFangSC-Semibold,Roboto-bold;
+    font-weight: 700;
+    font-size: 0.8rem;
+    background-color: #fff;
+    color: black;
+    margin: 0.5rem;
+    padding: 1rem;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px #ccc7c7;
+}
+
+
+.answer-title{
+    color: #d69999;
+}
+
+.answer-detail{
+    margin-top: 0.2rem;
+}

@@ -7,6 +7,10 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+var task = require('./service/get-answer-task');
+var redisCache = require('./service/reids-cache');
+
+
 var app = express();
 
 
@@ -38,5 +42,41 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 module.exports = app;
+
+
+//启动定时任务
+async function startTask_1() {
+   await task("1");
+}
+
+//启动定时任务
+async function startTask_2() {
+    task("2");
+}
+
+//启动定时任务
+async function startTask_3() {
+    task("3");
+}
+
+//启动定时任务
+async function startTask_4() {
+    task("4");
+}
+
+
+// setInterval(startTask_1,700);
+// setInterval(startTask_2,700);
+// setInterval(startTask_3,700);
+// setInterval(startTask_4,700);
+
+
+redisCache();
+
+
+
+
+
+
+

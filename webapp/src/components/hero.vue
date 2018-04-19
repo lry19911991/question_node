@@ -25,10 +25,21 @@
 
 </template>
 <script>
+
+    import axios from 'axios'
+
+
+
     export default {
-        name: "hero",
+        name: "detail",
+        mounted(){
+            let that=this;
+            this.timer = setTimeout(()=>{that.query()},500);
+
+        },
         data () {
             return {
+                timer:null,
                 title: '',
                 answer1: {option:"",optionContent:""},
                 answer2: {option:"",optionContent:""},
@@ -36,13 +47,33 @@
                 answer4: {option:"",optionContent:""}
             }
         },
+        beforeDestroy(){
+            if(this.timer) { //如果定时器还在运行 或者直接关闭，不用判断
+                clearInterval(this.timer); //关闭
+            }
+        },
         methods: {
-            async getHongbao (ss) {
-                alert(ss);
+            async query () {
+                var type=this.$route.params.name;
+                alert(type);
+                try {
+                    const {data: {message}} = await axios.post('http://47.97.194.211:8080/app/business/question?appType='+type)
+                    alert('--'+message)
+                } catch (e) {
+                    console.error(e)
+                    alert('服务器繁忙，请稍后重试')
+                }
 
-                router.replace(path);
-
-                // window.location.href="";
+                // $.getJSON('http://47.97.194.211:8080/app/business/question?appType='+type, function(data){
+                //     if(!!data){
+                //         this.title=data.data.title;
+                //         this.answer1= data.data.results[0]
+                //         this.answer2= data.data.results[1]
+                //         this.answer3= data.data.results[2]
+                //         this.answer4= data.data.results[3]
+                //     }
+                //
+                // });
             }
         }
 

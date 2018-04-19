@@ -20,7 +20,7 @@ let VueRouter = new Router({
             component: home,
         },
         {
-            path: '/hero',
+            path: '/detail/:name',
             component: hero,
         }
     ]

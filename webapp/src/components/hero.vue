@@ -55,10 +55,20 @@
         methods: {
             async query () {
                 var type=this.$route.params.name;
-                alert(type);
                 try {
-                    const {data: {message}} = await axios.post('http://47.97.194.211:8080/app/business/question?appType='+type)
-                    alert('--'+message)
+
+                    console.log(JSON.stringify(await axios.get('http://127.0.0.1:3000/question?appType='+type)));
+                    const {data:{results},data:{title}} = await axios.get('http://127.0.0.1:3000/question?appType='+type)
+                    alert(JSON.stringify(results));
+                    alert(JSON.stringify(title));
+                    if(!!results){
+                            this.title=title;
+                            this.answer1= results[0]
+                            this.answer2= results[1]
+                            this.answer3= results[2]
+                            this.answer4= results[3]
+                        }
+
                 } catch (e) {
                     console.error(e)
                     alert('服务器繁忙，请稍后重试')

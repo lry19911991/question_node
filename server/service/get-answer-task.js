@@ -1,5 +1,8 @@
-const axios = require('axios')
-const querystring = require('querystring')
+const axios = require('axios');
+const querystring = require('querystring');
+const logger = require('./logger');
+const redisCache = require('./reids-cache');
+
 const origin = 'https://h-ss.sohu.com'
 
 
@@ -27,8 +30,16 @@ async  function  request(appType) {
     return (async function get () {
 
         //获取答案
-        const data = await request.post(`https://h-ss.sohu.com/hotspot/millionHero/getQuestion`,"{\"appType\":1}")
-        console.log("appType"+appType+ "  "+JSON.stringify(data.data)+"  data");
+        const originData = await request.post(`https://h-ss.sohu.com/hotspot/millionHero/getQuestion`,"{\"appType\":"+appType+"}")
+        const  logData=JSON.stringify(originData.data.data);
+        logger.info(`appType: ${appType} data: ${logData}`);
+        // console.dir(data.data.data);
+        const  data=JSON.stringify(originData.data.data);
+
+        const type=appType;
+
+        //根据问题类型和 答题数据 保存数据到redis 队列中
+        await redisCache.saveRedisData({type,data});
 
     })()
 

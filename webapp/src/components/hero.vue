@@ -57,10 +57,8 @@
                 var type=this.$route.params.name;
                 try {
 
-                    console.log(JSON.stringify(await axios.get('http://127.0.0.1:3000/question?appType='+type)));
+                    // console.log(JSON.stringify(await axios.get('http://127.0.0.1:3000/question?appType='+type)));
                     const {data:{results},data:{title}} = await axios.get('http://127.0.0.1:3000/question?appType='+type)
-                    alert(JSON.stringify(results));
-                    alert(JSON.stringify(title));
                     if(!!results){
                             this.title=title;
                             this.answer1= results[0]
